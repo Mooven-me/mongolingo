@@ -1,0 +1,1251 @@
+{
+  "collections": {
+    "orders": {
+      "validator": {
+        "$jsonSchema": {
+          "bsonType": "object",
+          "required": ["orderNumber", "userId", "userInfo", "items", "pricing", "status", "createdAt"],
+          "properties": {
+            "orderNumber": {
+              "bsonType": "string",
+              "pattern": "^ORD-[0-9]{4}-[0-9]{3,}$"
+            },
+            "userId": {
+              "bsonType": "objectId"
+            },
+            "userInfo": {
+              "bsonType": "object",
+              "required": ["username", "email"],
+              "properties": {
+                "username": {
+                  "bsonType": "string"
+                },
+                "email": {
+                  "bsonType": "string"
+                }
+              }
+            },
+            "items": {
+              "bsonType": "array",
+              "minItems": 1,
+              "items": {
+                "bsonType": "object",
+                "required": ["productId", "productName", "quantity", "unitPrice", "totalPrice"],
+                "properties": {
+                  "productId": {
+                    "bsonType": "objectId"
+                  },
+                  "productName": {
+                    "bsonType": "string"
+                  },
+                  "quantity": {
+                    "bsonType": "int",
+                    "minimum": 1
+                  },
+                  "unitPrice": {
+                    "bsonType": "double",
+                    "minimum": 0
+                  },
+                  "totalPrice": {
+                    "bsonType": "double",
+                    "minimum": 0
+                  }
+                }
+              }
+            },
+            "pricing": {
+              "bsonType": "object",
+              "required": ["subtotal", "total"],
+              "properties": {
+                "subtotal": {
+                  "bsonType": "double",
+                  "minimum": 0
+                },
+                "tax": {
+                  "bsonType": "double",
+                  "minimum": 0
+                },
+                "shipping": {
+                  "bsonType": "double",
+                  "minimum": 0
+                },
+                "discount": {
+                  "bsonType": "double",
+                  "minimum": 0
+                },
+                "total": {
+                  "bsonType": "double",
+                  "minimum": 0
+                }
+              }
+            },
+            "status": {
+              "bsonType": "string",
+              "enum": ["pending", "processing", "shipped", "delivered", "cancelled"]
+            },
+            "shippingAddress": {
+              "bsonType": "object",
+              "properties": {
+                "street": {
+                  "bsonType": "string"
+                },
+                "city": {
+                  "bsonType": "string"
+                },
+                "state": {
+                  "bsonType": "string"
+                },
+                "zipCode": {
+                  "bsonType": "string"
+                },
+                "country": {
+                  "bsonType": "string"
+                }
+              }
+            },
+            "paymentMethod": {
+              "bsonType": "string",
+              "enum": ["credit_card", "paypal", "bank_transfer", "cash"]
+            },
+            "paymentStatus": {
+              "bsonType": "string",
+              "enum": ["pending", "paid", "failed", "refunded"]
+            },
+            "trackingNumber": {
+              "bsonType": "string"
+            },
+            "notes": {
+              "bsonType": "string"
+            },
+            "createdAt": {
+              "bsonType": "date"
+            },
+            "updatedAt": {
+              "bsonType": "date"
+            },
+            "deliveredAt": {
+              "bsonType": "date"
+            }
+          }
+        }
+      },
+      "indexes": [
+        { "userId": 1 },
+        { "status": 1 },
+        { "createdAt": -1 },
+        { "orderNumber": 1, "unique": true }
+      ],
+      "data": [
+        {
+          "orderNumber": "ORD-2024-001",
+          "userId": "ObjectId()",
+          "userInfo": {
+            "username": "marie.dubois",
+            "email": "marie.dubois@email.com"
+          },
+          "items": [
+            {
+              "productId": "ObjectId()",
+              "productName": "iPhone 15 Pro Max",
+              "quantity": 1,
+              "unitPrice": 1229.99,
+              "totalPrice": 1229.99
+            },
+            {
+              "productId": "ObjectId()",
+              "productName": "Coque iPhone 15 Pro Max",
+              "quantity": 1,
+              "unitPrice": 49.99,
+              "totalPrice": 49.99
+            }
+          ],
+          "pricing": {
+            "subtotal": 1279.98,
+            "tax": 255.99,
+            "shipping": 9.99,
+            "discount": 25.01,
+            "total": 1520.96
+          },
+          "status": "delivered",
+          "shippingAddress": {
+            "street": "123 Rue de la Paix",
+            "city": "Paris",
+            "state": "Île-de-France",
+            "zipCode": "75001",
+            "country": "France"
+          },
+          "paymentMethod": "credit_card",
+          "paymentStatus": "paid",
+          "trackingNumber": "FR123456789",
+          "notes": "Livraison en point relais demandée",
+          "createdAt": "2024-12-10T00:00:00Z",
+          "updatedAt": "2024-12-15T00:00:00Z",
+          "deliveredAt": "2024-12-14T00:00:00Z"
+        },
+        {
+          "orderNumber": "ORD-2024-002",
+          "userId": "ObjectId()",
+          "userInfo": {
+            "username": "jean.martin",
+            "email": "jean.martin@email.com"
+          },
+          "items": [
+            {
+              "productId": "ObjectId()",
+              "productName": "MacBook Air M3",
+              "quantity": 1,
+              "unitPrice": 1199.10,
+              "totalPrice": 1199.10
+            }
+          ],
+          "pricing": {
+            "subtotal": 1199.01,
+            "tax": 239.80,
+            "shipping": 0.01,
+            "discount": 0.10,
+            "total": 1438.80
+          },
+          "status": "processing",
+          "shippingAddress": {
+            "street": "456 Avenue des Champs",
+            "city": "Lyon",
+            "state": "Auvergne-Rhône-Alpes",
+            "zipCode": "69000",
+            "country": "France"
+          },
+          "paymentMethod": "paypal",
+          "paymentStatus": "paid",
+          "trackingNumber": "",
+          "notes": "",
+          "createdAt": "2024-12-18T00:00:00Z",
+          "updatedAt": "2024-12-19T00:00:00Z"
+        },
+        {
+          "orderNumber": "ORD-2024-003",
+          "userId": "ObjectId()",
+          "userInfo": {
+            "username": "sarah.cohen",
+            "email": "sarah.cohen@email.com"
+          },
+          "items": [
+            {
+              "productId": "ObjectId()",
+              "productName": "Nike Air Jordan 1 Retro High",
+              "quantity": 2,
+              "unitPrice": 179.99,
+              "totalPrice": 359.98
+            }
+          ],
+          "pricing": {
+            "subtotal": 359.98,
+            "tax": 72.10,
+            "shipping": 7.99,
+            "discount": 18.01,
+            "total": 421.97
+          },
+          "status": "shipped",
+          "shippingAddress": {
+            "street": "789 Boulevard Saint-Michel",
+            "city": "Bordeaux",
+            "state": "Nouvelle-Aquitaine",
+            "zipCode": "33000",
+            "country": "France"
+          },
+          "paymentMethod": "credit_card",
+          "paymentStatus": "paid",
+          "trackingNumber": "FR987654321",
+          "notes": "Cadeau - emballage spécial demandé",
+          "createdAt": "2024-12-16T00:00:00Z",
+          "updatedAt": "2024-12-20T00:00:00Z"
+        }
+      ]
+    },
+    "articles": {
+      "validator": {
+        "$jsonSchema": {
+          "bsonType": "object",
+          "required": ["title", "slug", "content", "author", "status", "createdAt"],
+          "properties": {
+            "title": {
+              "bsonType": "string",
+              "minLength": 5,
+              "maxLength": 200
+            },
+            "slug": {
+              "bsonType": "string",
+              "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+            },
+            "content": {
+              "bsonType": "string",
+              "minLength": 100
+            },
+            "excerpt": {
+              "bsonType": "string",
+              "maxLength": 500
+            },
+            "author": {
+              "bsonType": "object",
+              "required": ["id", "username"],
+              "properties": {
+                "id": {
+                  "bsonType": "objectId"
+                },
+                "username": {
+                  "bsonType": "string"
+                },
+                "avatar": {
+                  "bsonType": "string"
+                }
+              }
+            },
+            "category": {
+              "bsonType": "string"
+            },
+            "tags": {
+              "bsonType": "array",
+              "items": {
+                "bsonType": "string"
+              }
+            },
+            "status": {
+              "bsonType": "string",
+              "enum": ["draft", "published", "archived"]
+            },
+            "featured": {
+              "bsonType": "bool"
+            },
+            "featuredImage": {
+              "bsonType": "string"
+            },
+            "readTime": {
+              "bsonType": "int",
+              "minimum": 1
+            },
+            "views": {
+              "bsonType": "int",
+              "minimum": 0
+            },
+            "likes": {
+              "bsonType": "int",
+              "minimum": 0
+            },
+            "comments": {
+              "bsonType": "array",
+              "items": {
+                "bsonType": "object",
+                "properties": {
+                  "id": {
+                    "bsonType": "objectId"
+                  },
+                  "userId": {
+                    "bsonType": "objectId"
+                  },
+                  "username": {
+                    "bsonType": "string"
+                  },
+                  "content": {
+                    "bsonType": "string"
+                  },
+                  "createdAt": {
+                    "bsonType": "date"
+                  },
+                  "likes": {
+                    "bsonType": "int",
+                    "minimum": 0
+                  }
+                }
+              }
+            },
+            "publishedAt": {
+              "bsonType": "date"
+            },
+            "createdAt": {
+              "bsonType": "date"
+            },
+            "updatedAt": {
+              "bsonType": "date"
+            }
+          }
+        }
+      },
+      "indexes": [
+        { "slug": 1, "unique": true },
+        { "status": 1 },
+        { "category": 1 },
+        { "tags": 1 },
+        { "publishedAt": -1 },
+        { "title": "text", "content": "text", "tags": "text" }
+      ],
+      "data": [
+        {
+          "title": "Les tendances technologiques qui vont marquer 2025",
+          "slug": "tendances-technologiques-2025",
+          "content": "L'année 2025 s'annonce riche en innovations technologiques. Entre l'intelligence artificielle générative qui continue de se démocratiser, les avancées en informatique quantique et l'émergence de nouveaux paradigmes en réalité virtuelle, le paysage tech évolue à vitesse grand V. Dans cet article, nous explorons les principales tendances qui façonneront notre quotidien numérique dans les mois à venir. L'IA générative, notamment, transforme déjà la création de contenu, le développement logiciel et même l'éducation. Les entreprises investissent massivement dans ces technologies pour automatiser leurs processus et améliorer l'expérience utilisateur...",
+          "excerpt": "Découvrez les innovations technologiques majeures qui transformeront notre quotidien en 2025, de l'IA générative à l'informatique quantique.",
+          "author": {
+            "id": "ObjectId()",
+            "username": "tech_expert",
+            "avatar": "https://example.com/avatars/tech_expert.jpg"
+          },
+          "category": "Technology",
+          "tags": ["IA", "technologie", "2025", "innovation", "futur"],
+          "status": "published",
+          "featured": true,
+          "featuredImage": "https://example.com/articles/tech-trends-2025.jpg",
+          "readTime": 8,
+          "views": 2847,
+          "likes": 186,
+          "comments": [
+            {
+              "id": "ObjectId()",
+              "userId": "ObjectId()",
+              "username": "alex_dev",
+              "content": "Excellent article ! J'ai hâte de voir comment l'IA va évoluer cette année.",
+              "createdAt": "2024-12-19T00:00:00Z",
+              "likes": 12
+            }
+          ],
+          "publishedAt": "2024-12-18T00:00:00Z",
+          "createdAt": "2024-12-15T00:00:00Z",
+          "updatedAt": "2024-12-18T00:00:00Z"
+        },
+        {
+          "title": "Guide complet du développement mobile avec React Native",
+          "slug": "guide-developpement-mobile-react-native",
+          "content": "React Native révolutionne le développement mobile en permettant de créer des applications natives pour iOS et Android avec une seule base de code JavaScript. Ce framework, développé par Meta, combine la flexibilité de React avec la performance native des plateformes mobiles. Dans ce guide complet, nous aborderons les concepts fondamentaux, les meilleures pratiques et les outils essentiels pour maîtriser React Native. Nous couvrirons l'installation de l'environnement de développement, la création de composants réutilisables, la gestion d'état avec Redux, l'intégration d'APIs natives et les stratégies de déploiement...",
+          "excerpt": "Apprenez à développer des applications mobiles performantes avec React Native grâce à ce guide détaillé.",
+          "author": {
+            "id": "ObjectId()",
+            "username": "mobile_dev_pro",
+            "avatar": "https://example.com/avatars/mobile_dev.jpg"
+          },
+          "category": "Development",
+          "tags": ["react-native", "mobile", "javascript", "ios", "android"],
+          "status": "published",
+          "featured": false,
+          "featuredImage": "https://example.com/articles/react-native-guide.jpg",
+          "readTime": 15,
+          "views": 1523,
+          "likes": 94,
+          "comments": [],
+          "publishedAt": "2024-12-12T00:00:00Z",
+          "createdAt": "2024-12-05T00:00:00Z",
+          "updatedAt": "2024-12-12T00:00:00Z"
+        },
+        {
+          "title": "L'impact de l'intelligence artificielle sur l'e-commerce",
+          "slug": "ia-impact-ecommerce",
+          "content": "L'intelligence artificielle transforme radicalement le secteur de l'e-commerce, offrant des expériences personnalisées et optimisant les processus commerciaux. Des chatbots intelligents aux recommandations produits en passant par l'analyse prédictive, l'IA révolutionne la façon dont les consommateurs découvrent et achètent des produits en ligne. Cette transformation s'accompagne de défis éthiques et techniques qu'il convient d'aborder. Les algorithmes de recommandation deviennent de plus en plus sophistiqués, analysant non seulement l'historique d'achat mais aussi le comportement de navigation en temps réel...",
+          "excerpt": "Comment l'IA révolutionne l'e-commerce : personnalisation, automatisation et nouvelles opportunités business.",
+          "author": {
+            "id": "ObjectId()",
+            "username": "ecommerce_analyst",
+            "avatar": "https://example.com/avatars/analyst.jpg"
+          },
+          "category": "Business",
+          "tags": ["IA", "e-commerce", "personnalisation", "business", "digital"],
+          "status": "published",
+          "featured": true,
+          "featuredImage": "https://example.com/articles/ai-ecommerce.jpg",
+          "readTime": 12,
+          "views": 3205,
+          "likes": 267,
+          "comments": [
+            {
+              "id": "ObjectId()",
+              "userId": "ObjectId()",
+              "username": "shop_owner",
+              "content": "Très instructif ! J'aimerais implémenter ces solutions dans ma boutique.",
+              "createdAt": "2024-12-17T00:00:00Z",
+              "likes": 8
+            }
+          ],
+          "publishedAt": "2024-12-16T00:00:00Z",
+          "createdAt": "2024-12-10T00:00:00Z",
+          "updatedAt": "2024-12-16T00:00:00Z"
+        }
+      ]
+    },
+    "events": {
+      "validator": {
+        "$jsonSchema": {
+          "bsonType": "object",
+          "required": ["title", "description", "type", "organizer", "location", "dateTime", "status", "createdAt"],
+          "properties": {
+            "title": {
+              "bsonType": "string",
+              "minLength": 5,
+              "maxLength": 200
+            },
+            "description": {
+              "bsonType": "string"
+            },
+            "type": {
+              "bsonType": "string",
+              "enum": ["conference", "workshop", "meetup", "concert", "exhibition", "seminar"]
+            },
+            "organizer": {
+              "bsonType": "object",
+              "required": ["id", "name", "email"],
+              "properties": {
+                "id": {
+                  "bsonType": "objectId"
+                },
+                "name": {
+                  "bsonType": "string"
+                },
+                "email": {
+                  "bsonType": "string"
+                }
+              }
+            },
+            "location": {
+              "bsonType": "object",
+              "required": ["name", "city", "country"],
+              "properties": {
+                "name": {
+                  "bsonType": "string"
+                },
+                "address": {
+                  "bsonType": "string"
+                },
+                "city": {
+                  "bsonType": "string"
+                },
+                "country": {
+                  "bsonType": "string"
+                },
+                "coordinates": {
+                  "bsonType": "object",
+                  "properties": {
+                    "lat": {
+                      "bsonType": "double"
+                    },
+                    "lng": {
+                      "bsonType": "double"
+                    }
+                  }
+                }
+              }
+            },
+            "dateTime": {
+              "bsonType": "object",
+              "required": ["start", "end"],
+              "properties": {
+                "start": {
+                  "bsonType": "date"
+                },
+                "end": {
+                  "bsonType": "date"
+                },
+                "timezone": {
+                  "bsonType": "string"
+                }
+              }
+            },
+            "capacity": {
+              "bsonType": "int",
+              "minimum": 1
+            },
+            "attendees": {
+              "bsonType": "array",
+              "items": {
+                "bsonType": "object",
+                "properties": {
+                  "userId": {
+                    "bsonType": "objectId"
+                  },
+                  "username": {
+                    "bsonType": "string"
+                  },
+                  "registeredAt": {
+                    "bsonType": "date"
+                  },
+                  "status": {
+                    "bsonType": "string",
+                    "enum": ["registered", "attended", "cancelled"]
+                  }
+                }
+              }
+            },
+            "pricing": {
+              "bsonType": "object",
+              "properties": {
+                "isFree": {
+                  "bsonType": "bool"
+                },
+                "price": {
+                  "bsonType": "double",
+                  "minimum": 0
+                },
+                "currency": {
+                  "bsonType": "string"
+                }
+              }
+            },
+            "status": {
+              "bsonType": "string",
+              "enum": ["upcoming", "ongoing", "completed", "cancelled"]
+            },
+            "isPublic": {
+              "bsonType": "bool"
+            },
+            "createdAt": {
+              "bsonType": "date"
+            },
+            "updatedAt": {
+              "bsonType": "date"
+            }
+          }
+        }
+      },
+      "indexes": [
+        { "dateTime.start": 1 },
+        { "type": 1 },
+        { "status": 1 },
+        { "location.city": 1 },
+        { "tags": 1 },
+        { "createdAt": -1 }
+      ],
+      "data": [
+        {
+          "title": "Conférence Web Summit Paris 2025",
+          "description": "Le plus grand événement technologique d'Europe débarque à Paris ! Rejoignez plus de 70 000 participants pour découvrir les dernières innovations, rencontrer des leaders technologiques et explorer l'avenir du numérique. Au programme : conférences inspirantes, ateliers pratiques, networking et démonstrations des startups les plus prometteuses.",
+          "type": "conference",
+          "organizer": {
+            "id": "ObjectId()",
+            "name": "Web Summit Organization",
+            "email": "contact@websummit.com"
+          },
+          "location": {
+            "name": "Paris Expo Porte de Versailles",
+            "address": "1 Place de la Porte de Versailles",
+            "city": "Paris",
+            "country": "France",
+            "coordinates": {
+              "lat": 48.8333,
+              "lng": 2.2833
+            }
+          },
+          "dateTime": {
+            "start": "2025-03-15T09:00:00Z",
+            "end": "2025-03-17T18:00:00Z",
+            "timezone": "Europe/Paris"
+          },
+          "capacity": 75000,
+          "attendees": [
+            {
+              "userId": "ObjectId()",
+              "username": "startup_founder",
+              "registeredAt": "2024-12-01T00:00:00Z",
+              "status": "registered"
+            },
+            {
+              "userId": "ObjectId()",
+              "username": "tech_investor",
+              "registeredAt": "2024-12-05T00:00:00Z",
+              "status": "registered"
+            }
+          ],
+          "pricing": {
+            "isFree": false,
+            "price": 899.10,
+            "currency": "EUR"
+          },
+          "status": "upcoming",
+          "isPublic": true,
+          "createdAt": "2024-10-01T00:00:00Z",
+          "updatedAt": "2024-12-20T00:00:00Z"
+        },
+        {
+          "title": "Atelier MongoDB : De débutant à expert",
+          "description": "Formation intensive sur MongoDB couvrant les concepts fondamentaux jusqu'aux techniques avancées. Apprenez à concevoir des schémas efficaces, optimiser les performances, gérer les index et déployer en production. Atelier pratique avec des cas d'usage réels et des exercices hands-on.",
+          "type": "workshop",
+          "organizer": {
+            "id": "ObjectId()",
+            "name": "Database Academy",
+            "email": "formation@dbacademy.com"
+          },
+          "location": {
+            "name": "Campus Numérique",
+            "address": "25 Rue du Faubourg Saint-Antoine",
+            "city": "Paris",
+            "country": "France",
+            "coordinates": {
+              "lat": 48.8505,
+              "lng": 2.3709
+            }
+          },
+          "dateTime": {
+            "start": "2025-02-08T09:30:00Z",
+            "end": "2025-02-08T17:30:00Z",
+            "timezone": "Europe/Paris"
+          },
+          "capacity": 25,
+          "attendees": [
+            {
+              "userId": "ObjectId()",
+              "username": "backend_dev",
+              "registeredAt": "2024-12-18T00:00:00Z",
+              "status": "registered"
+            }
+          ],
+          "pricing": {
+            "isFree": false,
+            "price": 450.01,
+            "currency": "EUR"
+          },
+          "status": "upcoming",
+          "isPublic": true,
+          "createdAt": "2024-12-01T00:00:00Z",
+          "updatedAt": "2024-12-19T00:00:00Z"
+        },
+        {
+          "title": "Meetup React Paris - Les nouvelles features React 19",
+          "description": "Rencontre mensuelle de la communauté React parisienne. Ce mois-ci, focus sur React 19 et ses nouvelles fonctionnalités : Server Components, Actions, et améliorations des performances. Présentation suivie d'un networking avec pizza et boissons offertes.",
+          "type": "meetup",
+          "organizer": {
+            "id": "ObjectId()",
+            "name": "React Paris Community",
+            "email": "organizers@reactparis.com"
+          },
+          "location": {
+            "name": "Epitech Paris",
+            "address": "24 Rue Pasteur",
+            "city": "Paris",
+            "country": "France",
+            "coordinates": {
+              "lat": 48.8467,
+              "lng": 2.3333
+            }
+          },
+          "dateTime": {
+            "start": "2025-01-25T19:00:00Z",
+            "end": "2025-01-25T22:00:00Z",
+            "timezone": "Europe/Paris"
+          },
+          "capacity": 120,
+          "attendees": [
+            {
+              "userId": "ObjectId()",
+              "username": "react_enthusiast",
+              "registeredAt": "2024-12-20T00:00:00Z",
+              "status": "registered"
+            },
+            {
+              "userId": "ObjectId()",
+              "username": "frontend_ninja",
+              "registeredAt": "2024-12-21T00:00:00Z",
+              "status": "registered"
+            }
+          ],
+          "pricing": {
+            "isFree": true,
+            "price": 0.01,
+            "currency": "EUR"
+          },
+          "status": "upcoming",
+          "isPublic": true,
+          "createdAt": "2024-12-15T00:00:00Z",
+          "updatedAt": "2024-12-21T00:00:00Z"
+        },
+        {
+          "title": "Concert Jazz Fusion - The Modern Collective",
+          "description": "Soirée jazz fusion avec The Modern Collective, groupe reconnu pour ses compositions originales mêlant jazz traditionnel et influences électroniques contemporaines. Une expérience musicale unique dans un cadre intimiste.",
+          "type": "concert",
+          "organizer": {
+            "id": "ObjectId()",
+            "name": "Jazz Club Le Sunset",
+            "email": "booking@sunset-sunside.com"
+          },
+          "location": {
+            "name": "Le Sunset-Sunside",
+            "address": "60 Rue des Lombards",
+            "city": "Paris",
+            "country": "France",
+            "coordinates": {
+              "lat": 48.8610,
+              "lng": 2.3470
+            }
+          },
+          "dateTime": {
+            "start": "2025-01-18T21:00:00Z",
+            "end": "2025-01-18T23:30:00Z",
+            "timezone": "Europe/Paris"
+          },
+          "capacity": 80,
+          "attendees": [
+            {
+              "userId": "ObjectId()",
+              "username": "jazz_lover",
+              "registeredAt": "2024-12-12T00:00:00Z",
+              "status": "registered"
+            }
+          ],
+          "pricing": {
+            "isFree": false,
+            "price": 25.01,
+            "currency": "EUR"
+          },
+          "status": "upcoming",
+          "isPublic": true,
+          "createdAt": "2024-11-20T00:00:00Z",
+          "updatedAt": "2024-12-15T00:00:00Z"
+        }
+      ]
+    },
+    "quizzes": {
+      "validator": {
+        "$jsonSchema": {
+          "bsonType": "object",
+          "required": ["question", "difficulty", "category", "correctAnswer", "explanation", "collections", "points", "isActive", "createdAt"],
+          "properties": {
+            "question": {
+              "bsonType": "string",
+              "minLength": 10,
+              "maxLength": 500
+            },
+            "description": {
+              "bsonType": "string"
+            },
+            "difficulty": {
+              "bsonType": "string",
+              "enum": ["beginner", "intermediate", "advanced", "expert"]
+            },
+            "category": {
+              "bsonType": "string",
+              "enum": ["find", "aggregate", "update", "insert", "delete", "index", "schema"]
+            },
+            "subcategory": {
+              "bsonType": "string"
+            },
+            "correctAnswer": {
+              "bsonType": "string",
+              "minLength": 5
+            },
+            "options": {
+              "bsonType": "array",
+              "items": {
+                "bsonType": "string"
+              }
+            },
+            "explanation": {
+              "bsonType": "string",
+              "minLength": 20
+            },
+            "collections": {
+              "bsonType": "array",
+              "items": {
+                "bsonType": "string"
+              }
+            },
+            "expectedResult": {
+              "bsonType": "string"
+            },
+            "hints": {
+              "bsonType": "array",
+              "items": {
+                "bsonType": "string"
+              }
+            },
+            "tags": {
+              "bsonType": "array",
+              "items": {
+                "bsonType": "string"
+              }
+            },
+            "points": {
+              "bsonType": "int",
+              "minimum": 5,
+              "maximum": 100
+            },
+            "timeLimit": {
+              "bsonType": "int",
+              "minimum": 15
+            },
+            "attempts": {
+              "bsonType": "int",
+              "minimum": 1
+            },
+            "successRate": {
+              "bsonType": "double",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "createdBy": {
+              "bsonType": "objectId"
+            },
+            "isActive": {
+              "bsonType": "bool"
+            },
+            "createdAt": {
+              "bsonType": "date"
+            },
+            "updatedAt": {
+              "bsonType": "date"
+            }
+          }
+        }
+      },
+      "indexes": [
+        { "difficulty": 1 },
+        { "category": 1 },
+        { "tags": 1 },
+        { "isActive": 1 },
+        { "successRate": -1 }
+      ],
+      "data": []
+    },
+    "products": {
+      "validator": {
+        "$jsonSchema": {
+          "bsonType": "object",
+          "required": ["name", "description", "category", "brand", "price", "currency", "stock", "isActive", "createdAt"],
+          "properties": {
+            "name": {
+              "bsonType": "string",
+              "minLength": 1,
+              "maxLength": 200,
+              "description": "Nom du produit requis"
+            },
+            "description": {
+              "bsonType": "string",
+              "minLength": 10,
+              "maxLength": 2000
+            },
+            "category": {
+              "bsonType": "string"
+            },
+            "subcategory": {
+              "bsonType": "string"
+            },
+            "brand": {
+              "bsonType": "string"
+            },
+            "price": {
+              "bsonType": "double",
+              "minimum": 0,
+              "description": "Prix doit être positif"
+            },
+            "originalPrice": {
+              "bsonType": "double",
+              "minimum": 0
+            },
+            "discount": {
+              "bsonType": "double",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "currency": {
+              "bsonType": "string",
+              "enum": ["EUR", "USD", "CAD", "GBP"]
+            },
+            "stock": {
+              "bsonType": "int",
+              "minimum": 0
+            },
+            "tags": {
+              "bsonType": "array",
+              "items": {
+                "bsonType": "string"
+              }
+            },
+            "specifications": {
+              "bsonType": "object",
+              "properties": {
+                "weight": {
+                  "bsonType": "double",
+                  "minimum": 0
+                },
+                "dimensions": {
+                  "bsonType": "object",
+                  "properties": {
+                    "length": {
+                      "bsonType": "double",
+                      "minimum": 0
+                    },
+                    "width": {
+                      "bsonType": "double",
+                      "minimum": 0
+                    },
+                    "height": {
+                      "bsonType": "double",
+                      "minimum": 0
+                    }
+                  }
+                },
+                "color": {
+                  "bsonType": "string"
+                },
+                "material": {
+                  "bsonType": "string"
+                }
+              }
+            },
+            "images": {
+              "bsonType": "array",
+              "items": {
+                "bsonType": "string"
+              }
+            },
+            "ratings": {
+              "bsonType": "object",
+              "properties": {
+                "average": {
+                  "bsonType": "double",
+                  "minimum": 0,
+                  "maximum": 5
+                },
+                "count": {
+                  "bsonType": "int",
+                  "minimum": 0
+                },
+                "distribution": {
+                  "bsonType": "object",
+                  "properties": {
+                    "5": {
+                      "bsonType": "int",
+                      "minimum": 0
+                    },
+                    "4": {
+                      "bsonType": "int",
+                      "minimum": 0
+                    },
+                    "3": {
+                      "bsonType": "int",
+                      "minimum": 0
+                    },
+                    "2": {
+                      "bsonType": "int",
+                      "minimum": 0
+                    },
+                    "1": {
+                      "bsonType": "int",
+                      "minimum": 0
+                    }
+                  }
+                }
+              }
+            },
+            "reviews": {
+              "bsonType": "array",
+              "items": {
+                "bsonType": "object",
+                "required": ["userId", "username", "rating", "comment", "date"],
+                "properties": {
+                  "userId": {
+                    "bsonType": "objectId"
+                  },
+                  "username": {
+                    "bsonType": "string"
+                  },
+                  "rating": {
+                    "bsonType": "int",
+                    "minimum": 1,
+                    "maximum": 5
+                  },
+                  "comment": {
+                    "bsonType": "string"
+                  },
+                  "date": {
+                    "bsonType": "date"
+                  },
+                  "helpful": {
+                    "bsonType": "int",
+                    "minimum": 0
+                  }
+                }
+              }
+            },
+            "seller": {
+              "bsonType": "object",
+              "properties": {
+                "id": {
+                  "bsonType": "objectId"
+                },
+                "name": {
+                  "bsonType": "string"
+                },
+                "rating": {
+                  "bsonType": "double",
+                  "minimum": 0,
+                  "maximum": 5
+                }
+              }
+            },
+            "isActive": {
+              "bsonType": "bool"
+            },
+            "createdAt": {
+              "bsonType": "date"
+            },
+            "updatedAt": {
+              "bsonType": "date"
+            }
+          }
+        }
+      },
+      "indexes": [
+        { "category": 1 },
+        { "price": 1 },
+        { "ratings.average": -1 },
+        { "tags": 1 },
+        { "createdAt": -1 },
+        { "name": "text", "description": "text", "tags": "text" }
+      ],
+      "data": [
+        {
+          "name": "iPhone 15 Pro Max",
+          "description": "Le dernier smartphone d'Apple avec puce A17 Pro, appareil photo 48MP et écran Super Retina XDR de 6,7 pouces. Design en titane premium avec une résistance exceptionnelle.",
+          "category": "Electronics",
+          "subcategory": "Smartphones",
+          "brand": "Apple",
+          "price": 1229.99,
+          "originalPrice": 1299.99,
+          "discount": 5.4,
+          "currency": "EUR",
+          "stock": 25,
+          "tags": ["smartphone", "apple", "titanium", "pro", "camera"],
+          "specifications": {
+            "weight": 221.01,
+            "dimensions": {
+              "length": 159.9,
+              "width": 76.7,
+              "height": 8.25
+            },
+            "color": "Natural Titanium",
+            "material": "Titanium"
+          },
+          "images": [
+            "https://example.com/iphone15pro_1.jpg",
+            "https://example.com/iphone15pro_2.jpg"
+          ],
+          "ratings": {
+            "average": 4.7,
+            "count": 342,
+            "distribution": {
+              "5": 201,
+              "4": 98,
+              "3": 32,
+              "2": 8,
+              "1": 3
+            }
+          },
+          "reviews": [
+            {
+              "userId": "ObjectId()",
+              "username": "TechLover2024",
+              "rating": 5,
+              "comment": "Excellent smartphone, la qualité photo est impressionnante et le design en titane est magnifique.",
+              "date": "2024-12-15T00:00:00Z",
+              "helpful": 23
+            }
+          ],
+          "seller": {
+            "id": "ObjectId()",
+            "name": "Apple Store Officiel",
+            "rating": 4.9
+          },
+          "isActive": true,
+          "createdAt": "2024-09-22T00:00:00Z",
+          "updatedAt": "2024-12-20T00:00:00Z"
+        },
+        {
+          "name": "MacBook Air M3",
+          "description": "Ordinateur portable ultra-léger avec puce M3, écran Liquid Retina 13 pouces, jusqu'à 18 heures d'autonomie. Parfait pour le travail et la création.",
+          "category": "Electronics",
+          "subcategory": "Laptops",
+          "brand": "Apple",
+          "price": 1199.10,
+          "currency": "EUR",
+          "stock": 15,
+          "tags": ["laptop", "apple", "m3", "ultrabook", "portable"],
+          "specifications": {
+            "weight": 1240.01,
+            "dimensions": {
+              "length": 304.1,
+              "width": 215.6,
+              "height": 11.3
+            },
+            "color": "Space Gray",
+            "material": "Aluminum"
+          },
+          "images": [
+            "https://example.com/macbook_air_m3.jpg"
+          ],
+          "ratings": {
+            "average": 4.8,
+            "count": 156,
+            "distribution": {
+              "5": 98,
+              "4": 43,
+              "3": 12,
+              "2": 2,
+              "1": 1
+            }
+          },
+          "reviews": [],
+          "seller": {
+            "id": "ObjectId()",
+            "name": "Apple Store Officiel",
+            "rating": 4.9
+          },
+          "isActive": true,
+          "createdAt": "2024-03-04T00:00:00Z",
+          "updatedAt": "2024-12-18T00:00:00Z"
+        },
+        {
+          "name": "Nike Air Jordan 1 Retro High",
+          "description": "Baskets iconiques Nike Air Jordan en cuir premium. Le modèle qui a révolutionné le basketball et la mode streetwear. Confort et style légendaires.",
+          "category": "Fashion",
+          "subcategory": "Shoes",
+          "brand": "Nike",
+          "price": 179.99,
+          "originalPrice": 199.99,
+          "discount": 10.01,
+          "currency": "EUR",
+          "stock": 42,
+          "tags": ["sneakers", "jordan", "basketball", "retro", "streetwear"],
+          "specifications": {
+            "weight": 450.01,
+            "color": "Chicago Red/Black/White",
+            "material": "Leather"
+          },
+          "images": [
+            "https://example.com/jordan1_chicago.jpg",
+            "https://example.com/jordan1_side.jpg"
+          ],
+          "ratings": {
+            "average": 4.6,
+            "count": 284,
+            "distribution": {
+              "5": 167,
+              "4": 89,
+              "3": 19,
+              "2": 6,
+              "1": 3
+            }
+          },
+          "reviews": [
+            {
+              "userId": "ObjectId()",
+              "username": "SneakerHead",
+              "rating": 5,
+              "comment": "Qualité exceptionnelle, design intemporel. Un must-have pour tout amateur de sneakers.",
+              "date": "2024-11-28T00:00:00Z",
+              "helpful": 15
+            }
+          ],
+          "seller": {
+            "id": "ObjectId()",
+            "name": "Nike Official Store",
+            "rating": 4.7
+          },
+          "isActive": true,
+          "createdAt": "2024-01-15T00:00:00Z",
+          "updatedAt": "2024-12-01T00:00:00Z"
+        }
+      ]
+    }
+  }
+}

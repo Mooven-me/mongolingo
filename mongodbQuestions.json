@@ -1,0 +1,350 @@
+[
+  {
+    "question": "Quelle commande MongoDB permet de trouver tous les produits de la catégorie 'Electronics' ?",
+    "options": [
+      "db.products.find({ category: { $ne: 'Electronics' } })",
+      "db.products.find({ category: 'Electronics' })",
+      "db.products.findOne({ category: 'Electronics' })",
+      "db.products.find({ category: { $eq: 'Electronics' } })"
+    ],
+    "correctAnswer": 1,
+    "difficulty": "Facile",
+    "explanation": "La commande correcte pour trouver tous les produits de la catégorie 'Electronics' est db.products.find({ category: 'Electronics' })."
+  },
+  {
+    "question": "Quelle commande MongoDB permet de trouver un produit spécifique par son nom 'iPhone 15 Pro Max' ?",
+    "options": [
+      "db.products.find({ name: 'iPhone 15 Pro Max' })",
+      "db.products.find({ name: { $eq: 'iPhone 15 Pro Max' } })",
+      "db.products.findOne({ name: 'iPhone 15 Pro Max' })",
+      "db.products.find({ name: { $ne: 'iPhone 15 Pro Max' } })"
+    ],
+    "correctAnswer": 2,
+    "difficulty": "Facile",
+    "explanation": "La commande correcte pour trouver un produit spécifique par son nom est db.products.findOne({ name: 'iPhone 15 Pro Max' })."
+  },
+  {
+    "question": "Quelle commande MongoDB permet de compter le nombre de produits dans la collection 'products' ?",
+    "options": [
+      "db.products.find().count()",
+      "db.products.count()",
+      "db.products.find().length",
+      "db.products.countDocuments()"
+    ],
+    "correctAnswer": 3,
+    "difficulty": "Facile",
+    "explanation": "La commande correcte pour compter le nombre de produits dans la collection 'products' est db.products.countDocuments()."
+  },
+  {
+    "question": "Quelle commande MongoDB permet de trouver tous les articles avec le statut 'published' ?",
+    "options": [
+      "db.articles.find({ status: 'published' })",
+      "db.articles.find({ status: { $ne: 'published' } })",
+      "db.articles.findOne({ status: 'published' })",
+      "db.articles.find({ status: { $eq: 'published' } })"
+    ],
+    "correctAnswer": 0,
+    "difficulty": "Facile",
+    "explanation": "La commande correcte pour trouver tous les articles avec le statut 'published' est db.articles.find({ status: 'published' })."
+  },
+  {
+    "question": "Quelle commande MongoDB permet de mettre à jour le stock d'un produit à 30 pour le produit 'MacBook Air M3' ?",
+    "options": [
+      "db.products.updateMany({ name: 'MacBook Air M3' }, { $set: { stock: 30 } })",
+      "db.products.findOneAndUpdate({ name: 'MacBook Air M3' }, { $set: { stock: 30 } })",
+      "db.products.update({ name: 'MacBook Air M3' }, { stock: 30 })",
+      "db.products.updateOne({ name: 'MacBook Air M3' }, { $set: { stock: 30 } })"
+    ],
+    "correctAnswer": 3,
+    "difficulty": "Facile",
+    "explanation": "La commande correcte pour mettre à jour le stock d'un produit à 30 pour le produit 'MacBook Air M3' est db.products.updateOne({ name: 'MacBook Air M3' }, { $set: { stock: 30 } })."
+  },
+  {
+    "question": "Quelle commande MongoDB permet de supprimer un produit de la collection 'products' ?",
+    "options": [
+      "db.products.remove({ name: 'iPhone 15 Pro Max' })",
+      "db.products.deleteOne({ name: 'iPhone 15 Pro Max' })",
+      "db.products.deleteMany({ name: 'iPhone 15 Pro Max' })",
+      "db.products.drop({ name: 'iPhone 15 Pro Max' })"
+    ],
+    "correctAnswer": 1,
+    "difficulty": "Facile",
+    "explanation": "La commande correcte pour supprimer un produit de la collection 'products' est db.products.deleteOne({ name: 'iPhone 15 Pro Max' })."
+  },
+  {
+    "question": "Quelle commande MongoDB permet de trier les produits par prix décroissant ?",
+    "options": [
+      "db.products.find().limit({ price: -1 })",
+      "db.products.find().skip({ price: -1 })",
+      "db.products.find().sort({ price: -1 })",
+      "db.products.find().sort({ price: 1 })"
+    ],
+    "correctAnswer": 2,
+    "difficulty": "Facile",
+    "explanation": "La commande correcte pour trier les produits par prix décroissant est db.products.find().sort({ price: -1 })."
+  },
+  {
+    "question": "Quelle commande MongoDB permet de trouver les commandes avec un statut 'delivered' ?",
+    "options": [
+      "db.orders.find({ status: { $ne: 'delivered' } })",
+      "db.orders.find({ status: 'delivered' })",
+      "db.orders.find({ status: { $eq: 'delivered' } })",
+      "db.orders.findOne({ status: 'delivered' })"
+    ],
+    "correctAnswer": 1,
+    "difficulty": "Facile",
+    "explanation": "La commande correcte pour trouver les commandes avec un statut 'delivered' est db.orders.find({ status: 'delivered' })."
+  },
+  {
+    "question": "Quelle commande MongoDB permet de trouver les événements avec un type 'conference' ?",
+    "options": [
+      "db.events.findOne({ type: 'conference' })",
+      "db.events.find({ type: { $ne: 'conference' } })",
+      "db.events.find({ type: { $eq: 'conference' } })",
+      "db.events.find({ type: 'conference' })"
+    ],
+    "correctAnswer": 3,
+    "difficulty": "Facile",
+    "explanation": "La commande correcte pour trouver les événements avec un type 'conference' est db.events.find({ type: 'conference' })."
+  },
+  {
+    "question": "Quelle commande MongoDB permet de trouver les produits avec un prix supérieur à 1000 ?",
+    "options": [
+      "db.products.find({ price: { $eq: 1000 } })",
+      "db.products.find({ price: { $gt: 1000 } })",
+      "db.products.find({ price: { $ne: 1000 } })",
+      "db.products.find({ price: { $lt: 1000 } })"
+    ],
+    "correctAnswer": 1,
+    "difficulty": "Facile",
+    "explanation": "La commande correcte pour trouver les produits avec un prix supérieur à 1000 est db.products.find({ price: { $gt: 1000 } })."
+  },
+  {
+    "question": "Quelle commande MongoDB permet de trouver les articles avec un nombre de vues supérieur à 1000 ?",
+    "options": [
+      "db.articles.find({ views: { $lt: 1000 } })",
+      "db.articles.find({ views: { $ne: 1000 } })",
+      "db.articles.find({ views: { $gt: 1000 } })",
+      "db.articles.find({ views: { $eq: 1000 } })"
+    ],
+    "correctAnswer": 2,
+    "difficulty": "Facile",
+    "explanation": "La commande correcte pour trouver les articles avec un nombre de vues supérieur à 1000 est db.articles.find({ views: { $gt: 1000 } })."
+  },
+  {
+    "question": "Quelle commande MongoDB permet de trouver les produits avec un stock inférieur à 20 ?",
+    "options": [
+      "db.products.find({ stock: { $gt: 20 } })",
+      "db.products.find({ stock: { $ne: 20 } })",
+      "db.products.find({ stock: { $lt: 20 } })",
+      "db.products.find({ stock: { $eq: 20 } })"
+    ],
+    "correctAnswer": 2,
+    "difficulty": "Facile",
+    "explanation": "La commande correcte pour trouver les produits avec un stock inférieur à 20 est db.products.find({ stock: { $lt: 20 } })."
+  },
+  {
+    "question": "Quelle commande MongoDB permet de trouver les commandes avec un total supérieur à 1000 ?",
+    "options": [
+      "db.orders.find({ 'pricing.total': { $eq: 1000 } })",
+      "db.orders.find({ 'pricing.total': { $lt: 1000 } })",
+      "db.orders.find({ 'pricing.total': { $ne: 1000 } })",
+      "db.orders.find({ 'pricing.total': { $gt: 1000 } })"
+    ],
+    "correctAnswer": 3,
+    "difficulty": "Facile",
+    "explanation": "La commande correcte pour trouver les commandes avec un total supérieur à 1000 est db.orders.find({ 'pricing.total': { $gt: 1000 } })."
+  },
+  {
+    "question": "Quelle commande MongoDB permet de trouver les événements avec une capacité supérieure à 100 ?",
+    "options": [
+      "db.events.find({ capacity: { $gt: 100 } })",
+      "db.events.find({ capacity: { $ne: 100 } })",
+      "db.events.find({ capacity: { $lt: 100 } })",
+      "db.events.find({ capacity: { $eq: 100 } })"
+    ],
+    "correctAnswer": 0,
+    "difficulty": "Facile",
+    "explanation": "La commande correcte pour trouver les événements avec une capacité supérieure à 100 est db.events.find({ capacity: { $gt: 100 } })."
+  },
+  {
+    "question": "Quelle commande MongoDB permet de trouver les produits avec un prix compris entre 500 et 1000 ?",
+    "options": [
+      "db.products.find({ price: { $ne: 500, $ne: 1000 } })",
+      "db.products.find({ price: { $gt: 500, $lt: 1000 } })",
+      "db.products.find({ price: { $eq: 500, $eq: 1000 } })",
+      "db.products.find({ price: { $lt: 500, $gt: 1000 } })"
+    ],
+    "correctAnswer": 1,
+    "difficulty": "Facile",
+    "explanation": "La commande correcte pour trouver les produits avec un prix compris entre 500 et 1000 est db.products.find({ price: { $gt: 500, $lt: 1000 } })."
+  },
+  {
+    "question": "Quelle commande MongoDB permet de trouver les articles avec un nombre de likes supérieur à 50 ?",
+    "options": [
+      "db.articles.find({ likes: { $ne: 50 } })",
+      "db.articles.find({ likes: { $lt: 50 } })",
+      "db.articles.find({ likes: { $eq: 50 } })",
+      "db.articles.find({ likes: { $gt: 50 } })"
+    ],
+    "correctAnswer": 3,
+    "difficulty": "Normal",
+    "explanation": "La commande correcte pour trouver les articles avec un nombre de likes supérieur à 50 est db.articles.find({ likes: { $gt: 50 } })."
+  },
+  {
+    "question": "Quelle commande MongoDB permet de trouver les produits avec un nom contenant 'Apple' ?",
+    "options": [
+      "db.products.find({ name: { $eq: 'Apple' } })",
+      "db.products.find({ name: { $in: 'Apple' } })",
+      "db.products.find({ name: { $regex: 'Apple' } })",
+      "db.products.find({ name: { $ne: 'Apple' } })"
+    ],
+    "correctAnswer": 2,
+    "difficulty": "Normal",
+    "explanation": "La commande correcte pour trouver les produits avec un nom contenant 'Apple' est db.products.find({ name: { $regex: 'Apple' } })."
+  },
+  {
+    "question": "Quelle commande MongoDB permet de trouver les commandes avec un statut 'processing' ou 'shipped' ?",
+    "options": [
+      "db.orders.find({ status: { $nin: ['processing', 'shipped'] } })",
+      "db.orders.find({ status: { $ne: ['processing', 'shipped'] } })",
+      "db.orders.find({ status: { $in: ['processing', 'shipped'] } })",
+      "db.orders.find({ status: { $eq: ['processing', 'shipped'] } })"
+    ],
+    "correctAnswer": 2,
+    "difficulty": "Normal",
+    "explanation": "La commande correcte pour trouver les commandes avec un statut 'processing' ou 'shipped' est db.orders.find({ status: { $in: ['processing', 'shipped'] } })."
+  },
+  {
+    "question": "Quelle commande MongoDB permet de trouver les événements avec un type différent de 'conference' ?",
+    "options": [
+      "db.events.find({ type: { $nin: 'conference' } })",
+      "db.events.find({ type: { $ne: 'conference' } })",
+      "db.events.find({ type: { $eq: 'conference' } })",
+      "db.events.find({ type: { $in: 'conference' } })"
+    ],
+    "correctAnswer": 1,
+    "difficulty": "Normal",
+    "explanation": "La commande correcte pour trouver les événements avec un type différent de 'conference' est db.events.find({ type: { $ne: 'conference' } })."
+  },
+  {
+    "question": "Quelle commande MongoDB permet de trouver les produits avec un prix inférieur à 1000 et un stock supérieur à 10 ?",
+    "options": [
+      "db.products.find({ $and: [{ price: { $lt: 1000 } }, { stock: { $gt: 10 } }] })",
+      "db.products.find({ price: { $lt: 1000 }, stock: { $gt: 10 } })",
+      "db.products.find({ $or: [{ price: { $lt: 1000 } }, { stock: { $gt: 10 } }] })",
+      "db.products.find({ price: { $gt: 1000 }, stock: { $lt: 10 } })"
+    ],
+    "correctAnswer": 1,
+    "difficulty": "Normal",
+    "explanation": "La commande correcte pour trouver les produits avec un prix inférieur à 1000 et un stock supérieur à 10 est db.products.find({ price: { $lt: 1000 }, stock: { $gt: 10 } })."
+  },
+  {
+    "question": "Quelle commande MongoDB permet de trouver les articles avec un nombre de vues supérieur à 1000 et un statut 'published' ?",
+    "options": [
+      "db.articles.find({ views: { $lt: 1000 }, status: 'published' })",
+      "db.articles.find({ $or: [{ views: { $gt: 1000 } }, { status: 'published' }] })",
+      "db.articles.find({ $and: [{ views: { $gt: 1000 } }, { status: 'published' }] })",
+      "db.articles.find({ views: { $gt: 1000 }, status: 'published' })"
+    ],
+    "correctAnswer": 3,
+    "difficulty": "Normal",
+    "explanation": "La commande correcte pour trouver les articles avec un nombre de vues supérieur à 1000 et un statut 'published' est db.articles.find({ views: { $gt: 1000 }, status: 'published' })."
+  },
+  {
+    "question": "Quelle commande MongoDB permet de trouver les produits avec un nom contenant 'Nike' et un prix supérieur à 100 ?",
+    "options": [
+      "db.products.find({ name: { $regex: 'Nike' }, price: { $lt: 100 } })",
+      "db.products.find({ $or: [{ name: { $regex: 'Nike' } }, { price: { $gt: 100 } }] })",
+      "db.products.find({ $and: [{ name: { $regex: 'Nike' } }, { price: { $gt: 100 } }] })",
+      "db.products.find({ name: { $regex: 'Nike' }, price: { $gt: 100 } })"
+    ],
+    "correctAnswer": 3,
+    "difficulty": "Normal",
+    "explanation": "La commande correcte pour trouver les produits avec un nom contenant 'Nike' et un prix supérieur à 100 est db.products.find({ name: { $regex: 'Nike' }, price: { $gt: 100 } })."
+  },
+  {
+    "question": "Quelle commande MongoDB permet de trouver les commandes avec un total supérieur à 1000 et un statut 'delivered' ?",
+    "options": [
+      "db.orders.find({ 'pricing.total': { $gt: 1000 }, status: 'delivered' })",
+      "db.orders.find({ $and: [{ 'pricing.total': { $gt: 1000 } }, { status: 'delivered' }] })",
+      "db.orders.find({ 'pricing.total': { $lt: 1000 }, status: 'delivered' })",
+      "db.orders.find({ $or: [{ 'pricing.total': { $gt: 1000 } }, { status: 'delivered' }] })"
+    ],
+    "correctAnswer": 0,
+    "difficulty": "Normal",
+    "explanation": "La commande correcte pour trouver les commandes avec un total supérieur à 1000 et un statut 'delivered' est db.orders.find({ 'pricing.total': { $gt: 1000 }, status: 'delivered' })."
+  },
+  {
+    "question": "Quelle commande MongoDB permet de trouver les événements avec une capacité supérieure à 100 et un type 'conference' ?",
+    "options": [
+      "db.events.find({ capacity: { $lt: 100 }, type: 'conference' })",
+      "db.events.find({ capacity: { $gt: 100 }, type: 'conference' })",
+      "db.events.find({ $and: [{ capacity: { $gt: 100 } }, { type: 'conference' }] })",
+      "db.events.find({ $or: [{ capacity: { $gt: 100 } }, { type: 'conference' }] })"
+    ],
+    "correctAnswer": 1,
+    "difficulty": "Normal",
+    "explanation": "La commande correcte pour trouver les événements avec une capacité supérieure à 100 et un type 'conference' est db.events.find({ capacity: { $gt: 100 }, type: 'conference' })."
+  },
+  {
+    "question": "Quelle commande MongoDB permet de trouver les produits avec un prix supérieur à 1000 et un stock inférieur à 50, en utilisant l'opérateur $and ?",
+    "options": [
+      "db.products.find({ price: { $lt: 1000 }, stock: { $gt: 50 } })",
+      "db.products.find({ $and: [{ price: { $gt: 1000 } }, { stock: { $lt: 50 } }] })",
+      "db.products.find({ $or: [{ price: { $gt: 1000 } }, { stock: { $lt: 50 } }] })",
+      "db.products.find({ price: { $gt: 1000 }, stock: { $lt: 50 } })"
+    ],
+    "correctAnswer": 1,
+    "difficulty": "Difficile",
+    "explanation": "La commande correcte pour trouver les produits avec un prix supérieur à 1000 et un stock inférieur à 50, en utilisant l'opérateur $and, est db.products.find({ $and: [{ price: { $gt: 1000 } }, { stock: { $lt: 50 } }] })."
+  },
+  {
+    "question": "Quelle commande MongoDB permet de trouver les articles avec un nombre de vues supérieur à 1000 ou un nombre de likes supérieur à 100, en utilisant l'opérateur $or ?",
+    "options": [
+      "db.articles.find({ $or: [{ views: { $gt: 1000 } }, { likes: { $gt: 100 } }] })",
+      "db.articles.find({ views: { $gt: 1000 }, likes: { $gt: 100 } })",
+      "db.articles.find({ $and: [{ views: { $gt: 1000 } }, { likes: { $gt: 100 } }] })",
+      "db.articles.find({ views: { $lt: 1000 }, likes: { $lt: 100 } })"
+    ],
+    "correctAnswer": 0,
+    "difficulty": "Difficile",
+    "explanation": "La commande correcte pour trouver les articles avec un nombre de vues supérieur à 1000 ou un nombre de likes supérieur à 100, en utilisant l'opérateur $or, est db.articles.find({ $or: [{ views: { $gt: 1000 } }, { likes: { $gt: 100 } }] })."
+  },
+  {
+    "question": "Quelle commande MongoDB permet de trouver les commandes avec un total supérieur à 1000 et un statut 'delivered' ou 'shipped', en utilisant les opérateurs $and et $or ?",
+    "options": [
+      "db.orders.find({ $and: [{ 'pricing.total': { $gt: 1000 } }, { $or: [{ status: 'delivered' }, { status: 'shipped' }] }] })",
+      "db.orders.find({ 'pricing.total': { $gt: 1000 }, status: { $in: ['delivered', 'shipped'] } })",
+      "db.orders.find({ 'pricing.total': { $lt: 1000 }, status: { $nin: ['delivered', 'shipped'] } })",
+      "db.orders.find({ $or: [{ 'pricing.total': { $gt: 1000 } }, { status: 'delivered' }, { status: 'shipped' }] })"
+    ],
+    "correctAnswer": 0,
+    "difficulty": "Difficile",
+    "explanation": "La commande correcte pour trouver les commandes avec un total supérieur à 1000 et un statut 'delivered' ou 'shipped', en utilisant les opérateurs $and et $or, est db.orders.find({ $and: [{ 'pricing.total': { $gt: 1000 } }, { $or: [{ status: 'delivered' }, { status: 'shipped' }] }] })."
+  },
+  {
+    "question": "Quelle commande MongoDB permet de trouver les événements avec une capacité supérieure à 100 et un type 'conference' ou 'workshop', en utilisant les opérateurs $and et $or ?",
+    "options": [
+      "db.events.find({ capacity: { $gt: 100 }, type: { $in: ['conference', 'workshop'] } })",
+      "db.events.find({ $and: [{ capacity: { $gt: 100 } }, { $or: [{ type: 'conference' }, { type: 'workshop' }] }] })",
+      "db.events.find({ capacity: { $lt: 100 }, type: { $nin: ['conference', 'workshop'] } })",
+      "db.events.find({ $or: [{ capacity: { $gt: 100 } }, { type: 'conference' }, { type: 'workshop' }] })"
+    ],
+    "correctAnswer": 1,
+    "difficulty": "Difficile",
+    "explanation": "La commande correcte pour trouver les événements avec une capacité supérieure à 100 et un type 'conference' ou 'workshop', en utilisant les opérateurs $and et $or, est db.events.find({ $and: [{ capacity: { $gt: 100 } }, { $or: [{ type: 'conference' }, { type: 'workshop' }] }] })."
+  },
+  {
+    "question": "Quelle commande MongoDB permet de trouver les produits avec un prix supérieur à 1000 et un stock inférieur à 50, ou un nom contenant 'Apple', en utilisant les opérateurs $and et $or ?",
+    "options": [
+      "db.products.find({ $or: [{ $and: [{ price: { $gt: 1000 } }, { stock: { $lt: 50 } }] }, { name: { $regex: 'Apple' } }] })",
+      "db.products.find({ price: { $gt: 1000 }, stock: { $lt: 50 }, name: { $regex: 'Apple' } })",
+      "db.products.find({ $and: [{ price: { $gt: 1000 } }, { stock: { $lt: 50 } }, { name: { $regex: 'Apple' } }] })",
+      "db.products.find({ price: { $lt: 1000 }, stock: { $gt: 50 }, name: { $regex: 'Apple' } })"
+    ],
+    "correctAnswer": 0,
+    "difficulty": "Difficile",
+    "explanation": "La commande correcte pour trouver les produits avec un prix supérieur à 1000 et un stock inférieur à 50, ou un nom contenant 'Apple', en utilisant les opérateurs $and et $or, est db.products.find({ $or: [{ $and: [{ price: { $gt: 1000 } }, { stock: { $lt: 50 } }] }, { name: { $regex: 'Apple' } }] })."
+  }
+]
