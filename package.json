@@ -11,9 +11,11 @@
   },
   "dependencies": {
     "bootstrap": "^5.3.6",
+    "child_process": "^1.0.2",
     "cors": "^2.8.5",
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
+    "mongodb": "^6.17.0",
     "mongoose": "^8.15.1",
     "nootstrap": "^1.0.0",
     "react": "^19.1.0",

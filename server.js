@@ -4,6 +4,8 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import fs from 'fs';
 import Ajv from 'ajv';
+import { exec } from 'child_process';
+import { MongoClient } from 'mongodb'
 
 dotenv.config();
 
@@ -17,6 +19,41 @@ mongoose.connect(process.env.MONGO_URI)
 
 const collectionsData = JSON.parse(fs.readFileSync('./mongodbData.json')).collections;
 const questionsData = JSON.parse(fs.readFileSync('./mongodbQuestions.json'));
+
+async function executeMongoQuery(rawQuery, database = 'test') {
+  const client = new MongoClient('mongodb://localhost:27017');
+
+  try {
+    await client.connect();
+    const db = client.db(database);
+
+    // Remove leading 'db.' if it exists
+    const query = rawQuery.trim().startsWith('db.')
+      ? rawQuery.trim().slice(3)
+      : rawQuery.trim();
+
+    const [collectionName, ...rest] = query.split('.');
+    if (!collectionName || rest.length === 0) {
+      throw new Error('Invalid query format. Use format: collection.method(...)');
+    }
+
+    const collection = db.collection(collectionName);
+    const method = rest.join('.');
+    const result = await eval(`collection.${method}`);
+    if (result && typeof result.toArray === 'function') {
+      return await result.toArray();
+    }
+    return result;
+
+
+  } catch (err) {
+    throw new Error('MongoDB execution failed: ' + err.message);
+  } finally {
+    await client.close();
+  }
+}
+
+
 
 app.post('/import-data', async (req, res) => {
   try {
@@ -167,42 +204,28 @@ app.get('/export-data', async (req, res) => {
   try {
     const collections = await mongoose.connection.db.listCollections().toArray();
     const exportData = { collections: {} };
-
-    for (const collectionInfo of collections) {
-      const collectionName = collectionInfo.name;
-      // Skip questions collection
-      if (collectionName !== 'questions') {
-        const collection = mongoose.connection.db.collection(collectionName);
-        const documents = await collection.find({}).project({ _id: 0 }).toArray();
-        exportData.collections[collectionName] = documents;
-      }
-    }
-    res.json(exportData);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({
-      success: false,
-      message: 'Error exporting database',
-      error: error.message
-    });
-  }
-});
-
-app.get('/execute', async (req, res) => {
-  try {
-    const collections = await mongoose.connection.db.listCollections().toArray();
-    const exportData = {};
-
+    
     for (const collection of collections) {
       const collectionName = collection.name;
       const documents = await mongoose.connection.db.collection(collectionName).find({}).toArray();
-      exportData[collectionName] = documents;
+      exportData.collections[collectionName] = {
+        count: documents.length,
+        data: documents
+      };
     }
-
-    res.status(200).json(exportData);
+    
+    res.json({
+      success: true,
+      ...exportData,
+      totalCollections: Object.keys(exportData.collections).length
+    });
+    
   } catch (error) {
-    console.error('Error exporting data:', error);
-    res.status(500).json({ error: 'Error exporting data', details: error.message });
+    console.error('Error exporting database:', error);
+    res.status(500).json({
+      success: false,
+      message: error.message
+    });
   }
 });
 
@@ -355,6 +378,25 @@ app.post('/questions/:id/answer', async (req, res) => {
     });
   }
 });
+
+app.post('/execute-mongo', async (req, res) => {
+  try {
+    const { query, database } = req.body;
+    console.log('📝 Executing MongoDB query:', query);
+
+    const result = await executeMongoQuery(query, database);
+
+    res.json({
+      success: true,
+      result,
+      query
+    });
+  } catch (error) {
+    console.error('❌ Error executing MongoDB query:', error);
+    res.status(500).json({ success: false, message: error.message });
+  }
+});
+
 
 //Config section
 const PORT = 5000;

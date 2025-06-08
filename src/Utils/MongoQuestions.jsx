@@ -147,7 +147,7 @@ export const getQuestionById = async (questionId) => {
     }
 }
 
-export const getAnswerById = async (questionId, selectedAnswerIndex) => {
+export const getAnswerById = async (questionId, selectedAnswerIndex = 0) => {
     try {
         const response = await fetch(`http://localhost:5000/questions/${questionId}/answer`, {
             method: 'POST',
@@ -175,3 +175,38 @@ export const getAnswerById = async (questionId, selectedAnswerIndex) => {
         return null;
     }
 }
+
+
+export const executeMongoQuery = async (queryString, database = 'test') => {
+  try {
+    console.log('Executing MongoDB query:', queryString);
+    
+    const response = await fetch('http://localhost:5000/execute-mongo', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ 
+        query: queryString,
+        database: database 
+      })
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.message || 'Query execution failed');
+    }
+
+    if (data.success) {
+      console.log('✅ Query executed successfully:', data.result);
+      return data.result;
+    } else {
+      throw new Error(data.message || 'Unknown error');
+    }
+
+  } catch (error) {
+    console.error('❌ Error executing query:', error);
+    throw new Error(`Query execution failed: ${error.message}`);
+  }
+};
